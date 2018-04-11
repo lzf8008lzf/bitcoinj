@@ -16,16 +16,7 @@
 
 package org.bitcoinj.core;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Locale;
-
+import com.google.common.base.MoreObjects;
 import org.bitcoinj.params.MainNetParams;
 import org.bitcoinj.params.TestNet3Params;
 import org.bitcoinj.script.Script;
@@ -34,7 +25,13 @@ import org.bitcoinj.script.ScriptBuilder;
 import org.bitcoinj.script.ScriptPattern;
 import org.junit.Test;
 
-import com.google.common.base.MoreObjects;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Locale;
+
+import static org.junit.Assert.*;
 
 public class SegwitAddressTest {
     private static final MainNetParams MAINNET = MainNetParams.get();
@@ -70,7 +67,7 @@ public class SegwitAddressTest {
 
     @Test
     public void example_p2wpkh_testnet() {
-        String bech32 = "tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx";
+        String bech32 = "qrnuutt8ckm7sptrsh8eh7d7gv3rxwh9su7wy896rh";
 
         SegwitAddress address = SegwitAddress.fromBech32(TESTNET, bech32);
 

@@ -16,19 +16,32 @@
 
 package org.bitcoinj.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import org.bitcoinj.params.TestNet3Params;
+import org.junit.Test;
 
 import java.util.Locale;
 
-import org.junit.Test;
+import static org.bitcoinj.core.Utils.HEX;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class Bech32Test {
     @Test
     public void valid() {
+
+        String p2pkh="e7ce2d67c5b7e8056385cf9bf9be4322333ae587";
+
+       Address address=LegacyAddress.fromPubKeyHash(TestNet3Params.get(),HEX.decode(p2pkh));
+
+        System.out.println(address.toString());
+
+        Bech32.Bech32Data data = Bech32.decode("qrnuutt8ckm7sptrsh8eh7d7gv3rxwh9su7wy896rh");
+
         for (String valid : VALID) {
             Bech32.Bech32Data bechData = Bech32.decode(valid);
             String recode = Bech32.encode(bechData);
+
+            System.out.println(recode);
             assertEquals(String.format("Failed to roundtrip '%s' -> '%s'", valid, recode),
                     valid.toLowerCase(Locale.ROOT), recode.toLowerCase(Locale.ROOT));
             // Test encoding with an uppercase HRP
@@ -40,6 +53,7 @@ public class Bech32Test {
 
     private static final String[] VALID = {
             "A12UEL5L",
+            "qrnuutt8ckm7sptrsh8eh7d7gv3rxwh9su7wy896rh",
             "a12uel5l",
             "an83characterlonghumanreadablepartthatcontainsthenumber1andtheexcludedcharactersbio1tt5tgs",
             "abcdef1qpzry9x8gf2tvdw0s3jn54khce6mua7lmqqqxw",
